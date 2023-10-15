@@ -1,0 +1,19 @@
+{
+  "folders": [
+    {
+      "name": "args-ui-react",
+      "path": "../../args-ui-react"
+    },
+    {
+      "name": "funkit-react",
+      "path": "../../funkit-react"
+    },
+    {
+      "name": "funkit",
+      "path": ".."
+    }
+  ],
+  "settings": {
+    "svg.preview.background": "dark-transparent"
+  }
+}

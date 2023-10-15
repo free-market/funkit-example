@@ -1,0 +1,11 @@
+:root {
+    --main-bg-color: #060606;
+    --main-fg-color: #eee;
+}
+
+.workflowArgumentsForm {
+    background-color: #111;
+    color: #eee;
+    padding: 30px 40px;
+    border-radius: 30;
+}

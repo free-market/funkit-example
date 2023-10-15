@@ -1,0 +1,21 @@
+import { useCreateFun } from './FunWallet'
+import { Workflow, Arguments, ExecutionEventHandler } from '@freemarket/client-sdk'
+
+const workflow: Workflow = {
+  steps: [
+    {
+      type: 'unwrap-native',
+      amount: '0.1',
+      source: 'caller',
+    },
+  ],
+}
+
+const eventHandler: ExecutionEventHandler = event => {
+  console.log('workflow event:', event)
+}
+
+async function doStuff() {
+  const { funWallet } = useCreateFun()
+  const result = await funWallet.executeWorkflow(workflow, {}, eventHandler)
+}
