@@ -1,7 +1,8 @@
 import React from 'react'
 import { useMetaMask } from 'metamask-react'
 import { assetRefs } from './assetRefs'
-import { WalletBalances, type WalletBalancesProps } from '@freemarket/react'
+import { WalletBalances } from '@freemarket/react'
+import { type WalletBalancesProps } from '@freemarket/react/build/asset/WalletBalances'
 import { getChainDisplayName } from './lib/getChainDisplayName'
 import { useDemoAppStore } from './store'
 
@@ -57,10 +58,8 @@ export default function MetaMaskUI({ style }: Props) {
           <div>Address:</div>
           <div>{account}</div>
         </div>
-        <div>Balances</div>
         {account && (
           <div style={{}}>
-            <div>Wallet Balances</div>
             <WalletBalances {...walletBalancesProps} />
           </div>
         )}

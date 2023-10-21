@@ -2,8 +2,6 @@ import { type Auth, type FunWallet, type TransactionParams as FunTransactionPara
 import { assert, type EvmTransactionExecutor, type TransactionParams, type TransactionReceipt } from '@freemarket/client-sdk'
 import { Web3Provider } from '@ethersproject/providers'
 
-type Hex = `0x${string}`
-
 export class FunTransactionExecutor implements EvmTransactionExecutor {
   funWallet: FunWallet
   auth: Auth
@@ -21,11 +19,6 @@ export class FunTransactionExecutor implements EvmTransactionExecutor {
       userAddress,
       transactionParamsArray as FunTransactionParams[]
     )
-    // const operation = await this.funWallet.createOperation(this.auth, await this.auth.getAddress(), {
-    //   to: params.to as Hex,
-    //   value: params.value as Hex,
-    //   data: params.data as Hex,
-    // })
     const receipt = await this.funWallet.executeOperation(this.auth, operationBatch)
     assert(receipt.txId)
     const ethersProvider = new Web3Provider(this.provider)

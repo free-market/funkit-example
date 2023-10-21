@@ -8,8 +8,8 @@ interface SectionContainerProps {
 
 export default function SectionContainer(props: SectionContainerProps) {
   return (
-    <div style={{ border: '1px solid #333', ...props.style }}>
-      <div style={{ backgroundColor: '#333', padding: 6 }}>{props.title}</div>
+    <div style={{ border: '1px solid #222222', ...props.style }}>
+      <div style={{ backgroundColor: '#222222', padding: '0px 6px 0px 6px' }}>{props.title}</div>
       <div style={{ padding: 6 }}>{props.children}</div>
     </div>
   )

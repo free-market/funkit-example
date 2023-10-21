@@ -1,58 +1,93 @@
 import React, { useCallback, useState } from 'react'
-import './dark-mode.css'
-import './App.css'
-
 import { WorkflowArgumentsForm } from '@freemarket/react'
 import { type ExecutionEventHandler, type Arguments, type Workflow } from '@freemarket/client-sdk'
-import FunWalletStatus from './FunWalletStatus'
-
-// import Fun from "./Fun";
-// import MetaMaskDemo from './WorkflowMetamask'
-import MetaMaskUI from './MetamaskUI'
-import FunWalletBalances from './FunWalletBalances'
-import { useDemoAppStore } from './store'
-import { useCreateFun } from './lib/FunWallet'
-import WorkflowAssets from './lib/WorkflowAssets'
+import { useDemoAppStore, type SelectedWorkflow } from './store'
+import { addWorkflowRunner } from './lib/addWorkflowRunner'
 import SectionContainer from './SectionContainer'
-const workflow: Workflow = {
-  steps: [
-    {
-      type: 'wrap-native',
-      amount: '{{ startAmount }}',
-      source: 'caller',
-    },
-  ],
-  parameters: [
-    {
-      name: 'startAmount',
-      label: 'Amount',
-      description: 'The amount you want to wrap',
-      type: 'amount',
-    },
-  ],
+import { Operation, useConnector, useCreateFun, usePrimaryAuth } from '@funkit/react'
+import SelectBar, { type SelectBarItem } from './SelectBar'
+import CircularProgress from './CircularProgress'
+
+const workflows: Record<string, Workflow> = {
+  unwrap: {
+    parameters: [
+      {
+        name: 'startAmount',
+        label: 'Amount',
+        description: 'The amount you want to unwrap',
+        type: 'amount',
+      },
+    ],
+    steps: [
+      {
+        type: 'unwrap-native',
+        amount: '{{ startAmount }}',
+        source: 'caller',
+      },
+    ],
+  },
+  wrap: {
+    steps: [
+      {
+        type: 'wrap-native',
+        amount: '{{ startAmount }}',
+        source: 'caller',
+      },
+    ],
+    parameters: [
+      {
+        name: 'startAmount',
+        label: 'Amount',
+        description: 'The amount you want to wrap',
+        type: 'amount',
+      },
+    ],
+  },
 }
+
+const selectBarItems: SelectBarItem[] = [
+  {
+    label: 'Wrap',
+    value: 'wrap',
+  },
+  {
+    label: 'Unwrap',
+    value: 'unwrap',
+  },
+]
 
 export default function WorkflowExecutor() {
   const [status, setStatus] = useState('idle')
-  const { isWorkflowRunning, setWorkflowRunning, executionLogs, setExecutionLogs, incrementWorkflowInvocationCount } = useDemoAppStore(
-    state => ({
-      isWorkflowRunning: state.isWorkflowRunning,
-      setWorkflowRunning: state.setWorkflowRunning,
-      setExecutionLogs: state.setWorkflowExecutionLogs,
-      executionLogs: state.executionLogs,
-      incrementWorkflowInvocationCount: state.incrementWorkflowInvocationCount,
-    })
-  )
+  const {
+    isWorkflowRunning,
+    setWorkflowRunning,
+    executionLogs,
+    setExecutionLogs,
+    incrementWorkflowInvocationCount,
+    selectedWorkflow,
+    setOperation,
+  } = useDemoAppStore(state => ({
+    isWorkflowRunning: state.isWorkflowRunning,
+    setWorkflowRunning: state.setWorkflowRunning,
+    setExecutionLogs: state.setWorkflowExecutionLogs,
+    executionLogs: state.executionLogs,
+    incrementWorkflowInvocationCount: state.incrementWorkflowInvocationCount,
+    selectedWorkflow: state.selectedWorkflow,
+    setOperation: state.setSelectedWorkflow,
+  }))
   const workflowEventHandler: ExecutionEventHandler = e => {
     setStatus(e.message)
   }
-  const createFun = useCreateFun()
-  const { funWallet } = createFun
-  console.log('*funWallet*', !!funWallet)
+  const { funWallet: baseFunWallet } = useCreateFun()
+  const [auth] = usePrimaryAuth()
+  const {
+    connector: { provider },
+  } = useConnector({ index: 0, autoConnect: true })
+  const funWallet = addWorkflowRunner(baseFunWallet, auth, provider)
+
+  const workflow = workflows[selectedWorkflow]
   const handleSubmit = useCallback(
     async (args: Arguments) => {
-      console.log('submit', isWorkflowRunning, args)
-      console.log('*funWallet*', !!funWallet)
       if (!isWorkflowRunning && funWallet) {
         setWorkflowRunning(true)
         const result = await funWallet.executeWorkflow(workflow, args, workflowEventHandler)
@@ -62,11 +97,38 @@ export default function WorkflowExecutor() {
         console.log('result', result)
       }
     },
-    [funWallet]
+    [funWallet, selectedWorkflow]
   )
+
+  function getStatusPrefix() {
+    switch (status) {
+      case 'Workflow has completed successfully':
+        return '✅'
+      case 'idle':
+        return ' '
+      default:
+        return <CircularProgress></CircularProgress>
+    }
+  }
   return (
     <>
-      <SectionContainer title="Workflow Status">{status}</SectionContainer>
+      <SectionContainer title="Workflow Status">
+        <div style={{ display: 'flex' }}>
+          <div style={{ width: 30 }}>{getStatusPrefix()}</div>
+
+          {status}
+        </div>
+      </SectionContainer>
+      <div style={{ display: 'flex' }}>
+        <div style={{ marginRight: 8 }}>Operation: </div>
+        <SelectBar
+          items={selectBarItems}
+          onSelect={newSelection => {
+            setOperation(newSelection as SelectedWorkflow)
+          }}
+          selected={selectedWorkflow}
+        />
+      </div>
       <SectionContainer title="Workflow Parameters">
         <WorkflowArgumentsForm workflow={workflow} onSubmit={handleSubmit} />
       </SectionContainer>
