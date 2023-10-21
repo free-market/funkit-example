@@ -10,9 +10,9 @@ import {
 import React, { useState, useCallback, useEffect, useRef } from 'react'
 import { shortAddress } from './lib/utils'
 import { useEffectOnce } from './useEffectOnce'
-import { WalletBalances } from '@freemarket/args-ui-react'
+import { WalletBalances } from '@freemarket/react'
 import { type AssetReference } from '@freemarket/client-sdk'
-import { type WalletBalancesProps } from '@freemarket/args-ui-react/build/asset/WalletBalances'
+import { type WalletBalancesProps } from '@freemarket/react/build/asset/WalletBalances'
 import { useMetaMask } from 'metamask-react'
 import { assetRefs } from './assetRefs'
 import { useDemoAppStore } from './store'
@@ -127,7 +127,6 @@ export default function FunWalletStatus() {
 
       {active && account && (
         <div style={{}}>
-          <div>Wallet Balances</div>
           <WalletBalances {...walletBalancesProps} />
         </div>
       )}

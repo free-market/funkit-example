@@ -27,7 +27,7 @@ import React from 'react'
 import './dark-mode.css'
 import './App.css'
 
-import { WorkflowArgumentsForm } from '@freemarket/args-ui-react'
+import { WorkflowArgumentsForm } from '@freemarket/react'
 import { Workflow } from '@freemarket/client-sdk'
 
 const workflow: Workflow = {

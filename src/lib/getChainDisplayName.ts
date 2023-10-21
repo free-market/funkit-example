@@ -10,9 +10,6 @@ export function getChainDisplayName(chainId: string | null) {
     s = s.slice(2)
   }
   const chainNum = parseInt(s, 16)
-  let chain = getChainFromId(chainNum)
-  if (chainNum === 5) {
-    chain += ' (Goerli)'
-  }
+  const chain = getChainFromId(chainNum)
   return capitalizeFirstLetter(chain)
 }

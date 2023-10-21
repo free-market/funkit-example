@@ -1,19 +1,16 @@
 {
   "folders": [
     {
-      "name": "args-ui-react",
-      "path": "../../args-ui-react"
+      "name": "freemarket-react",
+      "path": "../../freemarket-react"
     },
     {
-      "name": "funkit-react",
-      "path": "../../funkit-react"
+      "name": "freemarket-funkit",
+      "path": "../../freemarket-funkit"
     },
     {
-      "name": "funkit",
+      "name": "funkit-example",
       "path": ".."
     }
   ],
-  "settings": {
-    "svg.preview.background": "dark-transparent"
-  }
 }

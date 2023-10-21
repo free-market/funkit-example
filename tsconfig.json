@@ -20,5 +20,5 @@
     "sourceMap": true,
     "types": ["node", "jest", "@testing-library/jest-dom"]
   },
-  "include": ["src"]
+  "include": ["src", "../freemarket-funkit/src/addWorkflowRunner.ts", "../freemarket-funkit/src/FunTransactionExecutor.ts"]
 }
