@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import './dark-mode.css'
 import './App.css'
 
-import { WorkflowArgumentsForm } from '@freemarket/args-ui-react'
+import { WorkflowArgumentsForm } from '@freemarket/react'
 import { type ExecutionEventHandler, type Arguments, type Workflow } from '@freemarket/client-sdk'
 import FunWalletStatus from './FunWalletStatus'
 

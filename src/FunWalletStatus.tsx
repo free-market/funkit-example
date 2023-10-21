@@ -10,27 +10,11 @@ import {
 import React, { useState, useCallback, useEffect, useRef } from 'react'
 import { shortAddress } from './lib/utils'
 import { useEffectOnce } from './useEffectOnce'
-import { WalletBalances } from '@freemarket/args-ui-react'
+import { WalletBalances, type WalletBalancesProps } from '@freemarket/react'
 import { type AssetReference } from '@freemarket/client-sdk'
-import { type WalletBalancesProps } from '@freemarket/args-ui-react/build/asset/WalletBalances'
 import { useMetaMask } from 'metamask-react'
 import { assetRefs } from './assetRefs'
 import { useDemoAppStore } from './store'
-
-// const FUN_WALLET_CONFIG = {
-//   apiKey: 'oh42D6bae967fwsTJBrqgfFZbTcCqvo8ljL1yGdc',
-//   chain: Goerli,
-//   gasSponsor: {
-//     sponsorAddress: '0xCB5D0b4569A39C217c243a436AC3feEe5dFeb9Ad' as `0x${string}`, // Gasless payments on Goerli. Please switch to another gas sponsor method, or prefund your wallet on mainnet!
-//   },
-// }
-
-// const DEFAULT_CONNECTORS = [MetamaskConnector()]
-
-// void configureNewFunStore({
-//   config: FUN_WALLET_CONFIG,
-//   connectors: DEFAULT_CONNECTORS,
-// })
 
 interface ConnectorButtonProps {
   index: number

@@ -1,8 +1,7 @@
 import React from 'react'
 import { useMetaMask } from 'metamask-react'
 import { assetRefs } from './assetRefs'
-import { WalletBalances } from '@freemarket/args-ui-react'
-import { type WalletBalancesProps } from '@freemarket/args-ui-react/build/asset/WalletBalances'
+import { WalletBalances, type WalletBalancesProps } from '@freemarket/react'
 import { getChainDisplayName } from './lib/getChainDisplayName'
 import { useDemoAppStore } from './store'
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { AnimatedNumber, AssetAmountView, AssetAmountsView, AssetView } from '@freemarket/args-ui-react'
+import { AnimatedNumber, AssetAmountView, AssetAmountsView, AssetView } from '@freemarket/react'
 import { type AssetAmount, type AssetReference } from '@freemarket/client-sdk'
 import { useEffectOnce } from '../useEffectOnce'
 // eslint-disable-next-line @typescript-eslint/no-empty-interface

@@ -1,18 +1,13 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import './dark-mode.css'
 import './App.css'
 
-import { WorkflowArgumentsForm } from '@freemarket/args-ui-react'
-import { type Arguments, type Workflow } from '@freemarket/client-sdk'
+import { type Workflow } from '@freemarket/client-sdk'
 import FunWalletStatus from './FunWalletStatus'
 
 // import Fun from "./Fun";
 // import MetaMaskDemo from './WorkflowMetamask'
 import MetaMaskUI from './MetamaskUI'
-import FunWalletBalances from './FunWalletBalances'
-import { useDemoAppStore } from './store'
-import { useCreateFun } from './lib/FunWallet'
-import WorkflowAssets from './lib/WorkflowAssets'
 import SectionContainer from './SectionContainer'
 import WorkflowRunner from './WorkflowRunner'
 const workflow: Workflow = {
