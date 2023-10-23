@@ -1,3 +1,4 @@
+import React, { useState, useCallback, useEffect, useRef } from 'react'
 import {
   convertToValidUserId,
   useConnector,
@@ -7,7 +8,6 @@ import {
   Goerli,
   usePrimaryAuth,
 } from '@funkit/react'
-import React, { useState, useCallback, useEffect, useRef } from 'react'
 import { shortAddress } from './lib/utils'
 import { useEffectOnce } from './useEffectOnce'
 import { WalletBalances } from '@freemarket/react'
@@ -72,6 +72,7 @@ export default function FunWalletStatus() {
   const [auth] = usePrimaryAuth()
 
   const initWalletMutex = useRef(false)
+  const [walletInitialized, setWalletInitialized] = useState(false)
 
   const initializeSingleAuthFunAccount = useCallback(async () => {
     if (funWallet) {
@@ -92,11 +93,12 @@ export default function FunWalletStatus() {
         initWalletMutex.current = true
         const uniqueId = await auth.getWalletUniqueId()
         console.log('calling initializeFunAccount')
-        void initializeFunAccount({
+        await initializeFunAccount({
           users: [{ userId: convertToValidUserId(connectorAccount) }],
           index: Math.floor(Math.random() * 10000000),
           uniqueId,
         })
+        setWalletInitialized(true)
       }
     } catch (e) {
       console.error('error during initializeFunAccount', e)
@@ -104,8 +106,9 @@ export default function FunWalletStatus() {
   }, [connectorAccount, auth, funWallet])
 
   useEffect(() => {
+    console.log('useEffect initializeSingleAuthFunAccount', auth, connectorAccount)
     void initializeSingleAuthFunAccount()
-  }, [auth, connectorAccount])
+  }, [auth, connectorAccount, walletInitialized])
 
   const walletBalancesProps: WalletBalancesProps = {
     stdProvider: ethereum,
@@ -125,12 +128,12 @@ export default function FunWalletStatus() {
         <div>{account}</div>
       </div>
 
-      {active && account && (
+      {account && (
         <div style={{}}>
           <WalletBalances {...walletBalancesProps} />
         </div>
       )}
-      {!active && <div>Metamask is not connected. Please connect to Metamask to continue with FunWallet.</div>}
+      {!account && <div>Metamask is not connected. Please connect to Metamask to continue with FunWallet.</div>}
       {/* {active && !account && (
         <div>
           <button
