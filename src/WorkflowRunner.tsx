@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { WorkflowArgumentsForm } from '@freemarket/react'
 import { type ExecutionEventHandler, type Arguments, type Workflow } from '@freemarket/client-sdk'
 import { useDemoAppStore, type SelectedWorkflow } from './store'
-import { addWorkflowRunner } from './lib/addWorkflowRunner'
+import { addExecuteWorkflow } from '@freemarket/funkit'
 import SectionContainer from './SectionContainer'
 import { Operation, useConnector, useCreateFun, usePrimaryAuth } from '@funkit/react'
 import SelectBar, { type SelectBarItem } from './SelectBar'
@@ -83,7 +83,7 @@ export default function WorkflowExecutor() {
   const {
     connector: { provider },
   } = useConnector({ index: 0, autoConnect: true })
-  const funWallet = addWorkflowRunner(baseFunWallet, auth, provider)
+  const funWallet = addExecuteWorkflow(baseFunWallet, auth, provider)
 
   const workflow = workflows[selectedWorkflow]
   const handleSubmit = useCallback(

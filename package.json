@@ -9,25 +9,21 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "@ethersproject/abstract-signer": "^5.7.0",
     "@ethersproject/bignumber": "^5.7.0",
     "@ethersproject/contracts": "^5.7.0",
     "@ethersproject/providers": "^5.7.2",
-    "@freemarket/client-sdk": "workspace:*",
-    "@freemarket/react": "workspace:*",
+    "@freemarket/client-sdk": "^0.3.0",
+    "@freemarket/react": "^0.1.0",
+    "@freemarket/funkit": "^0.1.0",
     "@funkit/core": "*",
     "@funkit/react": "^0.8.6",
-    "@hookform/resolvers": "^3.3.0",
-    "@metamask/detect-provider": "^2.0.0",
     "@types/node": "^16.18.46",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "metamask-react": "^2.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.45.4",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4",
     "zustand": "^4.3.7"
   },
   "devDependencies": {
