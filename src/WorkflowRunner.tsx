@@ -1,12 +1,11 @@
-import React, { useCallback, useState } from 'react'
-import { WorkflowArgumentsForm } from '@freemarket/react'
+import { useCallback, useState } from 'react'
+import { WorkflowArgumentsForm, CircularProgress } from '@freemarket/react'
 import { type ExecutionEventHandler, type Arguments, type Workflow } from '@freemarket/client-sdk'
 import { useDemoAppStore, type SelectedWorkflow } from './store'
 import { addExecuteWorkflow } from '@freemarket/funkit'
 import SectionContainer from './SectionContainer'
-import { Operation, useConnector, useCreateFun, usePrimaryAuth } from '@funkit/react'
+import { useConnector, useCreateFun, usePrimaryAuth } from '@funkit/react'
 import SelectBar, { type SelectBarItem } from './SelectBar'
-import CircularProgress from './CircularProgress'
 
 const workflows: Record<string, Workflow> = {
   unwrap: {

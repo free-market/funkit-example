@@ -23,6 +23,13 @@
       "problemMatcher": [],
       "label": "npm: start",
       "detail": "GENERATE_SOURCEMAP=false react-scripts start"
+    },
+    {
+      "type": "npm",
+      "script": "lint",
+      "problemMatcher": ["$eslint-compact"],
+      "label": "npm: lint",
+      "detail": "eslint src/**/*.ts src/**/*.tsx"
     }
   ]
 }

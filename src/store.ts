@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
-import { devtools, persist } from 'zustand/middleware'
+import { devtools } from 'zustand/middleware'
 import { type ExecutionLog } from '@freemarket/client-sdk'
 
 export type SelectedWorkflow = 'wrap' | 'unwrap'

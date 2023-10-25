@@ -18,7 +18,13 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
-    "types": ["node", "jest", "@testing-library/jest-dom"]
+    "types": ["node"]
   },
-  "include": ["src", "../freemarket-funkit/src/addWorkflowRunner.ts", "../freemarket-funkit/src/FunTransactionExecutor.ts"]
+  "include": [
+    "src",
+    "../freemarket-funkit/src/addWorkflowRunner.ts",
+    "../freemarket-funkit/src/FunTransactionExecutor.ts",
+    "src/lib/getChainDisplayName.ts",
+    "../freemarket-react/src/CircularProgress.tsx"
+  ]
 }
