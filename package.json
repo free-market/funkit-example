@@ -20,7 +20,7 @@
     "@funkit/react": "^0.8.6",
     "@funkit/core": "*",
     "@types/node": "^16.18.59",
-    "@types/react": "^18.2.31",
+    "@types/react": "18.2.0",
     "@types/react-dom": "^18.2.14",
     "metamask-react": "^2.7.0",
     "react": "^18.2.0",
